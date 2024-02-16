@@ -1,5 +1,9 @@
 package kea.exercises.productorderexercise.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import org.aspectj.weaver.ast.Or;
 
@@ -7,9 +11,13 @@ import org.aspectj.weaver.ast.Or;
 public class OrderLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id;
 
     @ManyToOne
+    //@JsonValue
+   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    //@JsonIdentityReference(alwaysAsId = true)
     private Product product;
     private int quantity;
 
@@ -26,6 +34,16 @@ public OrderLine() {
     }
 
     //****************** GETTERS & SETTERS ******************//
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Product getProduct() {
         return product;
     }

@@ -18,7 +18,7 @@ public class InitData implements CommandLineRunner {
     private final OrderLineReposity orderLineReposity;
 
 
-    public InitData(ProductRepository productRepository, OrderLineReposity orderLineReposity){
+    public InitData(ProductRepository productRepository, OrderLineReposity orderLineReposity) {
         this.productRepository = productRepository;
         this.orderLineReposity = orderLineReposity;
         System.out.println("Funsies");
@@ -26,12 +26,8 @@ public class InitData implements CommandLineRunner {
     }
 
 
-
-
-
-
-//"..." kaldes varargs og bruges i en metode til at modtage et vilkårligt antal argumenter
-    public void run(String ...args) {
+    //"..." kaldes varargs og bruges i en metode til at modtage et vilkårligt antal argumenter
+    public void run(String... args) {
         System.out.println("InitData is running ");
 
 
@@ -41,7 +37,7 @@ public class InitData implements CommandLineRunner {
         Product smartwatch = new Product("Apple Watch Series 7", "Smartwatch med avancerede sundhedsfunktioner", 5000, "34985458");
         Product camera = new Product("Sony A7 III", "Professionelt spejlreflekskamera", 15000, "3485858");
         Product tablet = new Product("iPad Pro", "Kraftfuld tablet med Retina-skærm", 8000, "343579349");
-        Product gamingConsole = new Product("PlayStation 5", "Next-gen spillekonsol med høj ydeevne", 4500, "548978439") ;
+        Product gamingConsole = new Product("PlayStation 5", "Next-gen spillekonsol med høj ydeevne", 4500, "548978439");
         Product router = new Product("TP-Link Archer AX6000", "Dual-band Wi-Fi 6 router med avancerede funktioner", 3000, "54843978439");
 
         productRepository.save(smartphone);
@@ -58,9 +54,17 @@ public class InitData implements CommandLineRunner {
         OrderLine ol1 = new OrderLine(smartphone, 3);
         orderLineReposity.save(ol1);
 
-        OrderLine ol2 = new OrderLine(smartphone, 2);
+        OrderLine ol2 = new OrderLine(smartphone, 1);
         orderLineReposity.save(ol2);
 
+        OrderLine ol3 = new OrderLine(smartwatch, 4);
+        orderLineReposity.save(ol3);
+
+        OrderLine ol4 = new OrderLine(camera, 1);
+        orderLineReposity.save(ol4);
+
+        OrderLine ol5 = new OrderLine(gamingConsole, 7);
+        orderLineReposity.save(ol5);
 
 
     }
