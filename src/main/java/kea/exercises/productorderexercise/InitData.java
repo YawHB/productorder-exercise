@@ -1,13 +1,19 @@
 package kea.exercises.productorderexercise;
 
+import kea.exercises.productorderexercise.models.Order;
 import kea.exercises.productorderexercise.models.OrderLine;
 import kea.exercises.productorderexercise.models.Product;
 import kea.exercises.productorderexercise.repositories.OrderLineReposity;
+import kea.exercises.productorderexercise.repositories.OrderRepository;
 import kea.exercises.productorderexercise.repositories.ProductRepository;
+import org.antlr.v4.runtime.atn.SemanticContext;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Component
 public class InitData implements CommandLineRunner {
@@ -17,11 +23,13 @@ public class InitData implements CommandLineRunner {
 
     private final OrderLineReposity orderLineReposity;
 
+    private final OrderRepository orderRepository;
 
-    public InitData(ProductRepository productRepository, OrderLineReposity orderLineReposity) {
+
+    public InitData(ProductRepository productRepository, OrderLineReposity orderLineReposity, OrderRepository orderRepository) {
         this.productRepository = productRepository;
         this.orderLineReposity = orderLineReposity;
-        System.out.println("Funsies");
+        this.orderRepository = orderRepository;
 
     }
 
@@ -52,19 +60,26 @@ public class InitData implements CommandLineRunner {
         //**************** ORDERLINE **********************//
 
         OrderLine ol1 = new OrderLine(smartphone, 3);
-        orderLineReposity.save(ol1);
+        //orderLineReposity.save(ol1); Alle orderLineRepositoy.save kald er fjernet da vi bruger Cascade.ALL i Order Entiteten
 
         OrderLine ol2 = new OrderLine(smartphone, 1);
-        orderLineReposity.save(ol2);
 
         OrderLine ol3 = new OrderLine(smartwatch, 4);
-        orderLineReposity.save(ol3);
 
         OrderLine ol4 = new OrderLine(camera, 1);
-        orderLineReposity.save(ol4);
 
         OrderLine ol5 = new OrderLine(gamingConsole, 7);
-        orderLineReposity.save(ol5);
+
+        OrderLine ol6 = new OrderLine(gamingConsole, 2);
+        OrderLine ol7 = new OrderLine(camera, 1);
+
+        //**************** ORDER **********************//
+
+        Order order1 = new Order(LocalDate.now(), true, List.of( ol1, ol2, ol5) );
+        orderRepository.save(order1);
+
+        Order order2 = new Order(LocalDate.now(), false, List.of(ol6, ol7));
+        orderRepository.save(order2);
 
 
     }

@@ -11,13 +11,12 @@ import org.aspectj.weaver.ast.Or;
 public class OrderLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id;
 
-    @ManyToOne
-    //@JsonValue
-   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     //@JsonIdentityReference(alwaysAsId = true)
+    //@JsonValue
+    @ManyToOne
+   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private Product product;
     private int quantity;
 
