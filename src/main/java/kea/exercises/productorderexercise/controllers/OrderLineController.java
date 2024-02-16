@@ -2,10 +2,9 @@ package kea.exercises.productorderexercise.controllers;
 
 import kea.exercises.productorderexercise.models.OrderLine;
 import kea.exercises.productorderexercise.repositories.OrderLineReposity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.aspectj.weaver.ast.Or;
+import org.hibernate.query.Order;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +20,12 @@ public class OrderLineController {
 
     @GetMapping
     public List<OrderLine> getAllOrderlines() {
-       return orderLineReposity.findAll();
+        return orderLineReposity.findAll();
 
+    }
+
+    @PostMapping
+    public OrderLine createOrderLine(@RequestBody OrderLine orderLine) {
+        return orderLineReposity.save(orderLine);
     }
 }
