@@ -1,28 +1,41 @@
 package kea.exercises.productorderexercise;
 
+import kea.exercises.productorderexercise.models.OrderLine;
 import kea.exercises.productorderexercise.models.Product;
+import kea.exercises.productorderexercise.repositories.OrderLineReposity;
 import kea.exercises.productorderexercise.repositories.ProductRepository;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-
 public class InitData implements CommandLineRunner {
 
     //@Autowired
     private final ProductRepository productRepository;
 
+    private final OrderLineReposity orderLineReposity;
 
-    public InitData(ProductRepository productRepository) {
+
+    public InitData(ProductRepository productRepository, OrderLineReposity orderLineReposity){
         this.productRepository = productRepository;
+        this.orderLineReposity = orderLineReposity;
+        System.out.println("Funsies");
+
     }
+
+
+
+
 
 
 //"..." kaldes varargs og bruges i en metode til at modtage et vilkårligt antal argumenter
     public void run(String ...args) {
         System.out.println("InitData is running ");
 
+
+        //**************** PRODUCTS **********************//
         Product smartphone = new Product("iPhone 13", "Højtydende smartphone", 9000, "48457459");
         Product headphones = new Product("Sony WH-1000XM4", "Trådløse støjreducerende hovedtelefoner", 2500, "45495849");
         Product smartwatch = new Product("Apple Watch Series 7", "Smartwatch med avancerede sundhedsfunktioner", 5000, "34985458");
@@ -38,6 +51,15 @@ public class InitData implements CommandLineRunner {
         productRepository.save(tablet);
         productRepository.save(gamingConsole);
         productRepository.save(router);
+
+
+        //**************** ORDERLINE **********************//
+
+        OrderLine ol1 = new OrderLine(smartphone, 3);
+        orderLineReposity.save(ol1);
+
+        OrderLine ol2 = new OrderLine(smartphone, 2);
+        orderLineReposity.save(ol2);
 
 
 

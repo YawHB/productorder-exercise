@@ -16,6 +16,9 @@ public class Product {
 
     private double price;
 
+   public Product() {
+
+    }
     public Product(String name, String description, double price, String EAN13) {
         this.name = name;
         this.description = description;
