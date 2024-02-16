@@ -18,11 +18,15 @@ public class OrderLineController {
         this.orderLineReposity = orderLineReposity;
     }
 
+
+    //*************** GET *************************//
+
     @GetMapping
     public List<OrderLine> getAllOrderlines() {
         return orderLineReposity.findAll();
 
     }
+//*************** POST *************************//
 
     @PostMapping
     public OrderLine createOrderLine(@RequestBody OrderLine orderLine) {
